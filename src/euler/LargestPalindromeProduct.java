@@ -8,27 +8,34 @@
  */
 package euler;
 
+import java.util.ArrayList;
+
 public class LargestPalindromeProduct {
 
     public static void main(String[] args) {
+          ArrayList<String> products = new ArrayList<>();
 
-//        for (int i = 100; i < 999; i++) {
-//            for (int j = 100; j < 999; j++) {
-//                System.out.print(" :" + i * j);
+        for (int i = 100; i < 999; i++) {
+            for (int j = 100; j < 999; j++) {
+                Integer prod;
+                prod = i * j;
+                products.add(prod.toString());
+                System.out.print(" " +i * j);
+            }
+            System.out.println();
+        }
+       
+//        for (int i = 0; i < 10; i++) {
+//            for (int j = 0; j < 10; j++) {
+//                System.out.print((" " + i) + j);
 //            }
 //            System.out.println();
 //        }
-        int[][] s;
-        s = new int[10][10];
-        for (int i = 1; i < 11; i++) {
-            for (int j = 1; j < 11; j++) {
-                //s[i][0] = i;
-                //s[0][j] = j;
-                //s[i][j] = s[i][j];
-                System.out.print( " " + i * j); 
-                //System.out.print(" " + s);
-            }
-            System.out.println();
+        String str = "aaaa";
+        if (str.charAt(0) == str.charAt(str.length() - 2)) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
         }
     }
 }
