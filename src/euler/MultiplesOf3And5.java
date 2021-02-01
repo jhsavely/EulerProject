@@ -15,9 +15,9 @@ public class MultiplesOf3And5{
 		for(int i = 0; i < n; i++){
 			if((i % 3 == 0 ) || (i % 5 == 0)){
 				s += i;
-				System.out.println(" " + i);
+				System.out.println("multiples: " + i);
 			}
 		}
-		System.out.println(" " + s);
+		System.out.println("sum of all the multiples: " + s);
 	}
 }
