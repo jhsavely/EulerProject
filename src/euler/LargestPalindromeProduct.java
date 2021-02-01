@@ -1,3 +1,4 @@
+package euler;
 /**
  *
  * A palindromic number reads the same both ways.
@@ -6,15 +7,14 @@
  *
  * @author jsavely
  */
-package euler;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class LargestPalindromeProduct {
 
-    final static int max2d = 99;
-    final static int max3d = 999;
+    final static int MAX2D = 99;
+    final static int MAX3D = 999;
     public ArrayList<Integer> palindromes = new ArrayList<>();
 
     public boolean isPalindrome(String str) {
@@ -28,8 +28,8 @@ public class LargestPalindromeProduct {
     }
 
     public void findPalindrome() {
-        for (int i = max3d; i > max2d; i--) {
-            for (int j = max3d; j > max2d; j--) {
+        for (int i = MAX3D; i > MAX2D; i--) {
+            for (int j = MAX3D; j > MAX2D; j--) {
                 String s = "" + (i * j);
                 if (isPalindrome(s)) {
                     palindromes.add((i * j));
@@ -37,7 +37,7 @@ public class LargestPalindromeProduct {
             }
         }
         int pal = Collections.max(palindromes);
-        System.out.println("max3x3 : " + pal);
+        System.out.println("max 3x3 palindrome: " + pal);
     }
 
     public static void main(String[] args) {
