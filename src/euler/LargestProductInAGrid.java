@@ -58,13 +58,53 @@ public class LargestProductInAGrid {
         }
     }
 
-    public int processHorizontalCells(int row,int column) {
-        if((column + SLICE) > DIM) return 0;
-        int product  = gridArray[row][column] * gridArray[row][column+1] * gridArray[row][column+2] * gridArray[row][column+3];
-//        for (int i = column; i < SLICE; i++) {
-//            product *= gridArray[row][column + i];
-//        }
+    public int processHorizontal(int row, int column) {
+        if ((column + SLICE) > DIM) {
+            return 0;
+        }
+        int product = 1;
+        for (int j = 0; j < SLICE; j++) {
+             product *= gridArray[row][column + j];
+        }
+       // int productRow = gridArray[row][column] * gridArray[row][column + 1] * gridArray[row][column + 2] * gridArray[row][column + 3];
+        return product;
+    }
 
+    public int processVertical(int row, int column) {
+        if ((row + SLICE) > DIM) {
+            return 0;
+        }
+        int product = 1;
+        for (int j = 0; j < SLICE; j++) {
+            product *= gridArray[row + j][column];
+        }
+        // productCol = gridArray[row][column] * gridArray[row + 1][column] * gridArray[row + 2][column] * gridArray[row + 3][column];
+        return product;
+    }
+
+    public int processRigthDiagonal(int row, int column) {
+        
+        if ((row + SLICE) > DIM || (column + SLICE) > DIM) {
+            return 0;
+        }
+        int product = 1;
+        for (int j = 0; j < SLICE; j++) {
+            product *= gridArray[row + j][column + j];
+        }
+       // productCol = gridArray[row][column] * gridArray[row + 1][column + 1] * gridArray[row + 2][column + 2] * gridArray[row + 3][column + 3];
+        return product;
+    }
+
+    public int processLeftDiagonal(int row, int column) {
+        //int productCol = 1;
+        if ((row + SLICE) > DIM || (column - SLICE) < -1) {
+            return 0;
+        }
+        int product = 1;
+        for (int j = 0; j < SLICE; j++) {
+            product *= gridArray[row + j][column - j];
+        }
+        //productCol = gridArray[row][column] * gridArray[row + 1][column - 1] * gridArray[row + 2][column - 2] * gridArray[row + 3][column - 3];
         return product;
     }
 
@@ -72,16 +112,18 @@ public class LargestProductInAGrid {
         readFile();
         printArray();
         long maxProduct = 0;
+        int maxRow = - 1, maxCol = -1;
         for (int row = 0; row < DIM; row++) {
-            for(int col = 0;col < DIM; col++ ){
-            int product = processHorizontalCells(row, col);
-            if (product > maxProduct) {
-                maxProduct = product;
+            for (int col = 0; col < DIM; col++) {
+                int product = processLeftDiagonal(row, col);
+                if (product > maxProduct) {
+                    maxRow = row;
+                    maxCol = col;
+                    maxProduct = product;
+                }
             }
-            }
-            
         }
-        System.out.println("Max product: " + maxProduct);
+        System.out.println("maxProduct: " + maxProduct + " maxRow = " + maxRow + " maxCol = " + maxCol);
     }
 
     public static void main(String[] args) throws IOException {
