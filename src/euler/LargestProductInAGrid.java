@@ -15,9 +15,42 @@ import java.io.IOException;
 
 public class LargestProductInAGrid {
 
+    enum Direction {
+        UNDEFINED,
+        HORIZONTAL_LEFT,
+        VERTICAL_DOWN,
+        DIAGONAL_RIGHT_DOWN,
+        DIAGONAL_LEFT_DOWN
+    };
+
+    class CellResult {
+
+        Direction dir = Direction.UNDEFINED;
+        int row = -1;
+        int column = -1;
+        int product = 0;
+
+        int productCompare(CellResult cr) {
+            return (product - cr.product);
+        }
+
+        void copy(CellResult cr) {
+            dir = cr.dir;
+            row = cr.row;
+            column = cr.column;
+            product = cr.product;
+        }
+
+        void print() {
+            System.out.println("product = " + product + " row = " + row + " column = " + column + " dir = " + dir);
+        }
+    }
+
     public static final int DIM = 20;
     public static final int SLICE = 4;
     int[][] gridArray = new int[DIM][DIM];
+    CellResult currentCell = new CellResult();
+    CellResult maxProductCell = new CellResult(); 
 
     public void readFile() {
         try {
@@ -58,72 +91,77 @@ public class LargestProductInAGrid {
         }
     }
 
-    public int processHorizontal(int row, int column) {
-        if ((column + SLICE) > DIM) {
-            return 0;
+    void processCell(int row, int column) {
+        currentCell.row = row;
+        currentCell.column = column;
+        currentCell.product = 0;
+        currentCell.dir = Direction.UNDEFINED;
+        if (!((column + SLICE) > DIM)) {
+            //currentCell.dir = Direction.HORIZONTAL_LEFT;
+            // int productRow = gridArray[row][column] * gridArray[row][column + 1] * gridArray[row][column + 2] * gridArray[row][column + 3];
+            int product = 1;
+            for (int j = 0; j < SLICE; j++) {
+                product *= gridArray[row][column + j];
+            }
+            if (product > currentCell.product) {
+                currentCell.product = product;
+                currentCell.dir = Direction.HORIZONTAL_LEFT;
+            }
         }
-        int product = 1;
-        for (int j = 0; j < SLICE; j++) {
-             product *= gridArray[row][column + j];
-        }
-       // int productRow = gridArray[row][column] * gridArray[row][column + 1] * gridArray[row][column + 2] * gridArray[row][column + 3];
-        return product;
-    }
 
-    public int processVertical(int row, int column) {
-        if ((row + SLICE) > DIM) {
-            return 0;
+        if (!((row + SLICE) > DIM)) {
+            //currentCell.dir = Direction.VERTICAL_DOWN;
+            // productCol = gridArray[row][column] * gridArray[row + 1][column] * gridArray[row + 2][column] * gridArray[row + 3][column];
+            int product = 1;
+            for (int j = 0; j < SLICE; j++) {
+                product *= gridArray[row + j][column];
+            }
+            if (product > currentCell.product) {
+                currentCell.product = product;
+                currentCell.dir = Direction.VERTICAL_DOWN;
+            }
         }
-        int product = 1;
-        for (int j = 0; j < SLICE; j++) {
-            product *= gridArray[row + j][column];
-        }
-        // productCol = gridArray[row][column] * gridArray[row + 1][column] * gridArray[row + 2][column] * gridArray[row + 3][column];
-        return product;
-    }
 
-    public int processRigthDiagonal(int row, int column) {
-        
-        if ((row + SLICE) > DIM || (column + SLICE) > DIM) {
-            return 0;
+        if (!((row + SLICE) > DIM || (column + SLICE) > DIM)) {
+            //currentCell.dir = Direction.DIAGONAL_RIGHT_DOWN;
+            // productCol = gridArray[row][column] * gridArray[row + 1][column + 1] * gridArray[row + 2][column + 2] * gridArray[row + 3][column + 3];
+            int product = 1;
+            for (int j = 0; j < SLICE; j++) {
+                product *= gridArray[row + j][column + j];
+            }
+            if (product > currentCell.product) {
+                currentCell.product = product;
+                currentCell.dir = Direction.DIAGONAL_RIGHT_DOWN;
+            }
         }
-        int product = 1;
-        for (int j = 0; j < SLICE; j++) {
-            product *= gridArray[row + j][column + j];
-        }
-       // productCol = gridArray[row][column] * gridArray[row + 1][column + 1] * gridArray[row + 2][column + 2] * gridArray[row + 3][column + 3];
-        return product;
-    }
 
-    public int processLeftDiagonal(int row, int column) {
-        //int productCol = 1;
-        if ((row + SLICE) > DIM || (column - SLICE) < -1) {
-            return 0;
+        if (!((row + SLICE) > DIM || (column - SLICE) < -1)) {
+            //productCol = gridArray[row][column] * gridArray[row + 1][column - 1] * gridArray[row + 2][column - 2] * gridArray[row + 3][column - 3];
+            //currentCell.dir = Direction.DIAGONAL_LEFT_DOWN;
+            int product = 1;
+            for (int j = 0; j < SLICE; j++) {
+                product *= gridArray[row + j][column - j];
+            }
+            if (product > currentCell.product) {
+                currentCell.product = product;
+                currentCell.dir = Direction.DIAGONAL_LEFT_DOWN;
+            }
         }
-        int product = 1;
-        for (int j = 0; j < SLICE; j++) {
-            product *= gridArray[row + j][column - j];
-        }
-        //productCol = gridArray[row][column] * gridArray[row + 1][column - 1] * gridArray[row + 2][column - 2] * gridArray[row + 3][column - 3];
-        return product;
     }
 
     public void findMaxProduct() {
         readFile();
         printArray();
-        long maxProduct = 0;
-        int maxRow = - 1, maxCol = -1;
         for (int row = 0; row < DIM; row++) {
             for (int col = 0; col < DIM; col++) {
-                int product = processLeftDiagonal(row, col);
-                if (product > maxProduct) {
-                    maxRow = row;
-                    maxCol = col;
-                    maxProduct = product;
-                }
+                processCell(row, col);
+                if (maxProductCell.productCompare(currentCell) < 0) {
+                    maxProductCell.copy(currentCell);
+                 }
             }
         }
-        System.out.println("maxProduct: " + maxProduct + " maxRow = " + maxRow + " maxCol = " + maxCol);
+        System.out.println("maxProduct: "  );
+         maxProductCell.print();
     }
 
     public static void main(String[] args) throws IOException {

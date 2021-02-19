@@ -60,6 +60,8 @@ public class LargestProductInASeries {
         long start = System.currentTimeMillis();
         LargestProductInASeries lpis = new LargestProductInASeries();
         lpis.findMaxProduct(13);
-        System.out.println("duration = " + (System.currentTimeMillis() - start));
+        //System.out.println("duration = " + (System.currentTimeMillis() - start));
+        final long end = System.nanoTime();
+        System.out.println("Took : " + ((end - start) / 1000));
     }
 }
