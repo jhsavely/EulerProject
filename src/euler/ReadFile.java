@@ -16,17 +16,29 @@ import java.util.Arrays;
  * @author jsavely
  */
 public class ReadFile {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        File file = new File("res/src_grid.txt");
-        byte[] bytes = new byte[(int) file.length()];
-        FileInputStream fis = new FileInputStream(file);
-        fis.read(bytes);
-        fis.close();
-        String[] valueStr = new String(bytes).trim().split("\\s+");
-        int[] grid = new int[valueStr.length];
-        for (int i = 0; i < valueStr.length; i++) {
-            grid[i] = Integer.parseInt(valueStr[i]);
+
+    void readFile() {
+        try {
+            File file = new File("res/src_grid.txt");
+            byte[] bytes = new byte[(int) file.length()];
+            FileInputStream fis = new FileInputStream(file);
+            fis.read(bytes);
+            fis.close();
+            String[] valueStr = new String(bytes).trim().split("\\s+");
+            int[] grid = new int[valueStr.length];
+            for (int i = 0; i < valueStr.length; i++) {
+                grid[i] = Integer.parseInt(valueStr[i]);
+            }
+            for (int i = 0; i < grid.length; i++) {
+                System.out.println(" " + grid[i]); 
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
         }
-        System.out.println(Arrays.asList(grid));
+    }
+    
+    public static void main(String[] args) {
+        ReadFile rf = new ReadFile();
+        rf.readFile();
     }
 }

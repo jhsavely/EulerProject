@@ -8,20 +8,39 @@ package euler;
  * @author jsavely
  */
 public class TriangularNumber {
-    int[] numbers = new int[100];
-    
-    public void genTriangleNumbers(){
-    int s = 0;
-        for (int i = 1; i < 100; i++) {
-            s += i;
-            numbers[i] = s;
-            //System.out.println(" i:" + i + " s= " + s);
-            System.out.println(" numbers:" + numbers[i]);
+
+    public void genTriangleNumbers() {
+        long t = 0;
+        int n = 0;
+        for (int i = 1; n < 500; i++) {
+            t += i;
+            n = countDivisorsSQRT(t);
+            System.out.println(" i:" + i + " numbers:" + t + " n = " + n);
         }
     }
-    
-    public void findDivisors(){
-    
+
+    public int countDivisorsLinear(long t) {
+        int count = 0;
+        for (int i = 1; i <= t; i++) {
+            if (t % i == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countDivisorsSQRT(long t) {
+        int count = 0;
+        for (int i = 1; i <= Math.sqrt(t); i++) {
+            if (t % i == 0) {
+                if (i == Math.sqrt(t)) {
+                    count++;
+                } else {
+                    count += 2;
+                }
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {

@@ -96,7 +96,7 @@ public class LargestProductInAGrid {
         currentCell.column = column;
         currentCell.product = 0;
         currentCell.dir = Direction.UNDEFINED;
-        if (!((column + SLICE) > DIM)) {
+        if ((column + SLICE) < DIM+1) {
             //currentCell.dir = Direction.HORIZONTAL_LEFT;
             // int productRow = gridArray[row][column] * gridArray[row][column + 1] * gridArray[row][column + 2] * gridArray[row][column + 3];
             int product = 1;
@@ -109,7 +109,7 @@ public class LargestProductInAGrid {
             }
         }
 
-        if (!((row + SLICE) > DIM)) {
+        if ((row + SLICE) < DIM + 1) {
             //currentCell.dir = Direction.VERTICAL_DOWN;
             // productCol = gridArray[row][column] * gridArray[row + 1][column] * gridArray[row + 2][column] * gridArray[row + 3][column];
             int product = 1;
@@ -122,7 +122,7 @@ public class LargestProductInAGrid {
             }
         }
 
-        if (!((row + SLICE) > DIM || (column + SLICE) > DIM)) {
+        if ((row + SLICE-1) < DIM && (column + SLICE-1) < DIM ) {
             //currentCell.dir = Direction.DIAGONAL_RIGHT_DOWN;
             // productCol = gridArray[row][column] * gridArray[row + 1][column + 1] * gridArray[row + 2][column + 2] * gridArray[row + 3][column + 3];
             int product = 1;
@@ -135,7 +135,7 @@ public class LargestProductInAGrid {
             }
         }
 
-        if (!((row + SLICE) > DIM || (column - SLICE) < -1)) {
+        if ((row + SLICE-1) < DIM  && (column - SLICE+1) > -1) {
             //productCol = gridArray[row][column] * gridArray[row + 1][column - 1] * gridArray[row + 2][column - 2] * gridArray[row + 3][column - 3];
             //currentCell.dir = Direction.DIAGONAL_LEFT_DOWN;
             int product = 1;
