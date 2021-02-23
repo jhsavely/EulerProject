@@ -7,19 +7,23 @@ package euler;
  *
  * @author jsavely
  */
+import org.apache.log4j.Logger;  
+
 public class TriangularNumber {
 
-    public void genTriangleNumbers() {
-        long t = 0;
-        int n = 0;
-        for (int i = 1; n < 500; i++) {
-            t += i;
-            n = countDivisorsSQRT(t);
-            System.out.println(" i:" + i + " numbers:" + t + " n = " + n);
+     static Logger log = Logger.getLogger(TriangularNumber.class.getName());  
+    
+    public void generateTriangleNumbers() {
+        long triangularNumber = 0;
+        int divisors = 0;
+        for (int i = 1; divisors < 500; i++) {
+            triangularNumber += i;
+            divisors = countDivisorsSQRT(triangularNumber);
+            System.out.println(" i:" + i + " number:" + triangularNumber + " divisors = " + divisors);
         }
     }
 
-    public int countDivisorsLinear(long t) {
+    public int countDivisorsLinear(long t) {//38 minutes
         int count = 0;
         for (int i = 1; i <= t; i++) {
             if (t % i == 0) {
@@ -29,7 +33,7 @@ public class TriangularNumber {
         return count;
     }
 
-    public int countDivisorsSQRT(long t) {
+    public int countDivisorsSQRT(long t) {//2 seconds
         int count = 0;
         for (int i = 1; i <= Math.sqrt(t); i++) {
             if (t % i == 0) {
@@ -44,7 +48,9 @@ public class TriangularNumber {
     }
 
     public static void main(String[] args) {
+        log.debug("Hello this is a debug message");  
+        log.info("Hello this is an info message");  
         TriangularNumber t = new TriangularNumber();
-        t.genTriangleNumbers();
+        t.generateTriangleNumbers();
     }
 }
