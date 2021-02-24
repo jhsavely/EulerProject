@@ -19,7 +19,8 @@ public class TriangularNumber {
         for (int i = 1; divisors < 500; i++) {
             triangularNumber += i;
             divisors = countDivisorsSQRT(triangularNumber);
-            System.out.println(" i:" + i + " number:" + triangularNumber + " divisors = " + divisors);
+            //System.out.println(" i:" + i + " number:" + triangularNumber + " divisors = " + divisors);
+            if(divisors >= 500) log.info(" i:" + i + " number:" + triangularNumber + " divisors = " + divisors);
         }
     }
 
@@ -48,9 +49,9 @@ public class TriangularNumber {
     }
 
     public static void main(String[] args) {
-        log.debug("Hello this is a debug message");  
-        log.info("Hello this is an info message");  
+        long start = System.currentTimeMillis();
         TriangularNumber t = new TriangularNumber();
         t.generateTriangleNumbers();
+        System.out.println("duration = " + (System.currentTimeMillis() - start) + "ms");
     }
 }

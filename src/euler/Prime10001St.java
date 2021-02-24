@@ -17,7 +17,7 @@ public class Prime10001St {
 
     public void sieve() {
         primes.clear();
-        for (int n = 2; primes.size() < PRIME_INDEX; n++) {//start from 2
+        for (int n = 2; primes.size() < PRIME_INDEX; n++) {//from 2 
             boolean isPrime = true;
             for (int j = 0; j < primes.size(); j++) {
                 int prime = primes.get(j);
