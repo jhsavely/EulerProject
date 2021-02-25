@@ -4,8 +4,14 @@ dist/
 #netbeans specific
 #core
 nbproject/*
+nbproject/
 nbproject/project.properties
-nbproject/project.xml
+nbuild/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xmlbproject/project.xml
 
 #java specific
 *.class
@@ -20,10 +26,4 @@ nbproject/project.xml
 *.lock
 *.properties
 
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+
