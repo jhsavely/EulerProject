@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,8 @@ import java.math.BigInteger;
  */
 public class ReadFile {
 
+    static Logger log = Logger.getLogger(ReadFile.class.getName());
+    
     void readFileAsBytes() {
         try {
             File file = new File("res/src_grid.txt");
@@ -50,19 +53,14 @@ public class ReadFile {
             }
             BufferedReader br = new BufferedReader(new FileReader(file));
             String str;
-            int linesCount = 0;
-            int wordsCount = 0;
-            int commaCount = 0;
-            char comma = ',';
-            
+            int linesCount = 0, wordsCount = 0, commaCount = 0;
             while ((str = br.readLine()) != null) {
-                char[] lineChars = new char[str.length()];
                 for (int i = 0; i < str.length(); i++) {
-                    lineChars[i] = str.charAt(i);
-                    if(lineChars[i] == comma){
+                    if (str.charAt(i) == ',') {
                         commaCount++;
                     }
                 }
+                //commaCount += str.length() - str.replace(",","").length();
                 linesCount++;
                 wordsCount += str.split("\\s+").length;
             }
@@ -76,8 +74,10 @@ public class ReadFile {
     }
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         ReadFile rf = new ReadFile();
         //rf.readFileAsBytes();
         rf.getFileStatistic();
+        System.out.println("duration = " + (System.currentTimeMillis() - start) + "ms");
     }
 }
