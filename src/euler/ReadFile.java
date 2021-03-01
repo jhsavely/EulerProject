@@ -6,6 +6,7 @@
 package euler;
 
 import static euler.LargeSum.log;
+import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
 public class ReadFile {
 
     static Logger log = Logger.getLogger(ReadFile.class.getName());
-    
+
     void readFileAsBytes() {
         try {
             File file = new File("res/src_grid.txt");
@@ -60,7 +61,7 @@ public class ReadFile {
                         commaCount++;
                     }
                 }
-                //commaCount += str.length() - str.replace(",","").length();
+                //DEBUG commaCount += str.length() - str.replace(",","").length();
                 linesCount++;
                 wordsCount += str.split("\\s+").length;
             }
@@ -73,11 +74,54 @@ public class ReadFile {
         }
     }
 
+    void printASCII() {
+        //Output ASCII charachters
+        for (int i = 0; i < 255; i++) {
+            //System.out.println(i + " ");
+            System.out.println("ASCII " + (char) i + "  =  " + i);
+        }
+    }
+
+    boolean isOdd(int n) {
+        return ((n & 0x1) != 0);
+    }
+
+    boolean isEven(int n) {
+        return ((n & 0x1) == 0);
+    }
+
+    String binaryFomat(int m) {
+        return Integer.toString(m, 2);
+    }
+
+    static String encryptDecrypt(String inputString) {
+        char key = 'K';
+        String outputString = "";
+        int len = inputString.length();
+        for (int i = 0; i < len; i++) {
+            outputString += Character.toString((char) (inputString.charAt(i) ^ key));
+        }
+        return outputString;
+    }
+
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         ReadFile rf = new ReadFile();
         //rf.readFileAsBytes();
         rf.getFileStatistic();
-        System.out.println("duration = " + (System.currentTimeMillis() - start) + "ms");
+        for (int i = 0; i < 10; i++) {
+            if (rf.isOdd(i)) {
+                log.info("number " + i + " is odd");
+            } else {
+                log.info("number " + i + " is even");
+            }
+        }
+        
+        String sampleString = "ThisIsString"; 
+        log.info("To XOR: " + sampleString); 
+        String encryptedString = encryptDecrypt(sampleString); 
+        log.info("Ecrypted String: " + encryptedString); 
+        log.info("Decrypted String: " + encryptDecrypt(encryptedString)); 
+        System.out.println("Duration = " + (System.currentTimeMillis() - start) + " ms");
     }
 }

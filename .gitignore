@@ -7,7 +7,6 @@ nbproject/*
 nbproject/
 nbproject/project.properties
 nbuild/
-nbbuild/
 dist/
 nbdist/
 nbactions.xml
