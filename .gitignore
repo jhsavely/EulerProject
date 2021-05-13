@@ -24,5 +24,6 @@ nb-configuration.xmlbproject/project.xml
 *.DS_Store
 *.lock
 *.properties
+*.xml
 
 
