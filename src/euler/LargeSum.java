@@ -77,5 +77,4 @@ public class LargeSum {
         ls.doBigDecSum();
         System.out.println("duration = " + (System.currentTimeMillis() - start) + "ms");
     }
-
 }

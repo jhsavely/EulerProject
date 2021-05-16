@@ -12,13 +12,14 @@ package euler;
  */
 public class EvenFibonacciNumbers {
 
-//    public static long fibonacci(int n) {//recursive Fibonacci numbers, purpousely ineffective, for demonstration 
-//        if (n <= 1) {
-//            return n;
-//        } else {
-//            return fibonacci(n - 1) + fibonacci(n - 2);
-//        }
-//    }
+    public static long fibonacci(int n) {//recursive Fibonacci numbers, purpousely ineffective, for demonstration 
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+    
     public static void main(String[] args) {
 //        int n = Integer.parseInt(args[0]);
 //        System.out.println(fibonacci(n));
