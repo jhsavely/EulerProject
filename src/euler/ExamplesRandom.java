@@ -19,9 +19,9 @@ import org.apache.log4j.Logger;
  *
  * @author jsavely
  */
-public class ReadFile {
+public class ExamplesRandom {
 
-    static Logger log = Logger.getLogger(ReadFile.class.getName());
+    static Logger log = Logger.getLogger(ExamplesRandom.class.getName());
 
     void readFileAsBytes() {
         try {
@@ -104,9 +104,15 @@ public class ReadFile {
         return outputString;
     }
 
+    public static String ternary(int a, int b) {
+        String c = (a > 0) ? "a" : "b";
+        return c;
+    }
+
     public static void main(String[] args) {
+        int startCount = 0;
         long start = System.currentTimeMillis();
-        ReadFile rf = new ReadFile();
+        ExamplesRandom rf = new ExamplesRandom();
         //rf.readFileAsBytes();
         rf.getFileStatistic();
         for (int i = 0; i < 10; i++) {
@@ -116,12 +122,46 @@ public class ReadFile {
                 log.info("number " + i + " is even");
             }
         }
-        
-        String sampleString = "ThisIsString"; 
-        log.info("To XOR: " + sampleString); 
-        String encryptedString = encryptDecrypt(sampleString); 
-        log.info("Ecrypted String: " + encryptedString); 
-        log.info("Decrypted String: " + encryptDecrypt(encryptedString)); 
+
+        String sampleString = "ThisIsString";
+        log.info("To XOR: " + sampleString);
+        String encryptedString = encryptDecrypt(sampleString);
+        log.info("Ecrypted String: " + encryptedString);
+        log.info("Decrypted String: " + encryptDecrypt(encryptedString));
         System.out.println("Duration = " + (System.currentTimeMillis() - start) + " ms");
+        System.out.println("startCount = " + startCount);
+        //log.info(" startCount" + startCount + " ");
+        double a = .999;
+        int b = (int) Math.round(a);
+        b = 200;
+        System.out.println("a = " + a + " b  = " + b);
+        System.out.println("c = " + ternary((int) a, b));
+        String c = "This is string";
+        String newStr = c.substring(5, 11);
+        System.out.println(c);
+        System.out.println(newStr);
+//        for(int i =0;i < c.length();i++){
+//        System.out.println(c.substring(i,i+1));
+//        }
+        int cpCount = c.codePointCount(0, c.length());
+        System.out.println(cpCount);
+//        do{
+//            System.out.println("Hello!");
+//            b--;
+//        }while (b > 0);
+
+        int amountToRetire = 1_000_000;
+        int payment = 3000;
+        int interest;
+        int interestRate = 4;
+        int balance = 0;
+        int years = 30;
+        while (balance < amountToRetire) {
+            balance += payment;
+            interest = balance * interestRate / 100;
+            balance += interest;
+            years++;
+        }
+        System.out.println("You can retire in :" + years);
     }
 }
