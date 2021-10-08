@@ -1,11 +1,11 @@
 package euler;
 
-/**
- *Problem 3.
- * The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime
- * factor of the number 600851475143 ?
- *
- * @author jsavely
+/*
+ Problem 3.
+  The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime
+  factor of the number 600851475143 ?
+
+  @author jsavely
  */
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +38,7 @@ public class LargestPrimeFactor {
         }
     }
 
-    public long findDivsor(long limit) {
+    public long findDivisor(long limit) {
         long result = 0;
         for (long prime : primes) {
             if (prime < 2) {
@@ -61,7 +61,7 @@ public class LargestPrimeFactor {
         LargestPrimeFactor p = new LargestPrimeFactor();
         p.sieve((long) Math.sqrt(TEST_NUMBER));
         for (long divident = TEST_NUMBER; divident > 1;) {
-            long divisor = p.findDivsor(divident);
+            long divisor = p.findDivisor(divident);
             if (divisor > 0) {
                 p.divisors.add(divisor);
             } else {
