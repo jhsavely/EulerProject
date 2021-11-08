@@ -13,7 +13,7 @@ package euler;
 public class EvenFibonacciNumbers {
 
     public static void main(String[] args) {
-        final int MAX_FIB = 4000000;
+        final int MAX_FIB = 4_000_000;
         int fib0 = 0, fib1 = 1, iterationLimit = 1000;//iterationLimit is safety catch for while()
         long s = 0;
         while (fib1 < MAX_FIB && iterationLimit > 0) {
