@@ -1,6 +1,9 @@
 package euler;
 
-/**
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
+
+/*
  * Problem 8. The four adjacent digits in the 1000-digit number that have the
  * greatest product are 9 × 9 × 8 × 9 = 5832. Find the thirteen adjacent digits
  * in the 1000-digit number that have the greatest product. What is the value of
@@ -34,34 +37,23 @@ public class LargestProductInASeries {
 
     int[] srcNumber = new int[SRC.length()];
 
-    public LargestProductInASeries() {
-        for (int j = 0; j < SRC.length(); j++) {
-            srcNumber[j] = Integer.parseInt(SRC.substring(j, j + 1));
-        }
-    }
-
-    public long findMaxProduct(int windowSize) {
+    public void findMaxProduct(int windowSize) {
         long maxProduct = 0;
-        for (int i = 0; i < srcNumber.length - windowSize; i++) {
-            long product = 1;
-            for (int j = 0; j < windowSize; j++) {
-                product *= srcNumber[i + j];
-            }
-            if (product > maxProduct) {
-                maxProduct = product;
-            }
-            System.out.println(" product: " + product);
+        IntStream.range(0, SRC.length()).forEach(j -> srcNumber[j] = Integer.parseInt(SRC.substring(j, j + 1)));
+        for (AtomicInteger i = new AtomicInteger(); i.get() < srcNumber.length - windowSize; i.getAndIncrement()) {
+            long product = IntStream.range(0, windowSize).mapToLong(j -> srcNumber[i.get() + j]).reduce(1, (a, b) -> a * b);
+            if (product > maxProduct) maxProduct = product;
         }
         System.out.println("Max product: " + maxProduct);
-        return maxProduct;
     }
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         LargestProductInASeries lpis = new LargestProductInASeries();
         lpis.findMaxProduct(13);
-        //System.out.println("duration = " + (System.currentTimeMillis() - start));
+        System.out.println("duration = " + (System.currentTimeMillis() - start));
         final long end = System.nanoTime();
         System.out.println("Took : " + ((end - start) / 1000));
     }
 }
+

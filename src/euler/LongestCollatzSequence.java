@@ -2,7 +2,7 @@ package euler;
 
 import org.apache.log4j.Logger;
 
-/**
+/*
  * Problem 14. The following iterative sequence is defined for the set of
  * positive integers: n → n/2 (n is even) n → 3n + 1 (n is odd)
  *
@@ -41,7 +41,6 @@ public class LongestCollatzSequence {
                 startNum = i;
                log.info("maxChain = " + maxChain + " startNum = " + startNum);
             }
-            // DEBUG log.info("chain = "+ chain + " start = " + i);
         }
         log.info("maxChain = " + maxChain + " startNum = " + startNum);
     }
@@ -50,7 +49,6 @@ public class LongestCollatzSequence {
         long start = System.currentTimeMillis();
         LongestCollatzSequence l = new LongestCollatzSequence();
         l.findMaxSequence();
-        // DEBUG log.info("getCollatzSequence " + l.getCollatzSequence(626331));
         System.out.println("duration = " + (System.currentTimeMillis() - start) + "ms");
     }
 }

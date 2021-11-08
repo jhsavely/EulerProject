@@ -8,7 +8,7 @@ package euler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
+/*
  * Problem 10 The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17. Find the sum
  * of all the primes below two million.
  *
@@ -23,8 +23,7 @@ public class SumOfPrimes {
         primes.clear();
         for (int n = 2; n < PRIME_INDEX; n++) {//start from 2
             boolean isPrime = true;
-            for (int j = 0; j < primes.size(); j++) {
-                int prime = primes.get(j);
+            for (int prime : primes) {
                 if (prime * prime > n) {
                     break;
                 }
@@ -45,9 +44,8 @@ public class SumOfPrimes {
         sieve();
         for (Integer i : primes) {
             sum += i;
-           //System.out.println(i+" : " + sum);
         }
-        System.out.println("sumOfAllPrimes : " + sum);
+        System.out.println("sum : " + sum);
     }
 
     public static void main(String[] args) {

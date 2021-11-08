@@ -6,9 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import org.apache.log4j.Logger;
 
-/**
+/*
  * Problem 13. Work out the first ten digits of the sum of the following
  * one-hundred 50-digit numbers.
  *
@@ -32,10 +33,10 @@ public class LargeSum {
             while ((str = br.readLine()) != null) {
                 BigInteger bi = new BigInteger(str);
                 //DEBUG log.info(countLines + " Bi is : " + bi);
-                sum =  sum.add(bi);
-               //DEBUG  log.info("Sum is : " + sum);
-                countLines ++;
-                
+                sum = sum.add(bi);
+                //DEBUG  log.info("Sum is : " + sum);
+                countLines++;
+
             }
             log.info("Lines in file: " + countLines);
             log.info("Sum is : " + sum);
@@ -44,8 +45,8 @@ public class LargeSum {
             e.printStackTrace();
         }
     }
-    
-        void doBigDecSum() {
+
+    void doBigDecSum() {
         try {
             File file = new File("res/hundred_numbers");
             if (!file.exists()) {
@@ -59,9 +60,9 @@ public class LargeSum {
             while ((str = br.readLine()) != null) {
                 BigDecimal bi = new BigDecimal(str);
                 //DEBUG log.info(countLines + " Bi is : " + bi);
-                sum =  sum.add(bi);
-               //DEBUG  log.info("Sum is : " + sum);
-                countLines ++;
+                sum = sum.add(bi);
+                //DEBUG  log.info("Sum is : " + sum);
+                countLines++;
             }
             log.info("Lines in file: " + countLines);
             log.info("Sum is : " + sum);

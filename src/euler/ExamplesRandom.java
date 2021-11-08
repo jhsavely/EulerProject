@@ -5,15 +5,9 @@
  */
 package euler;
 
-import static euler.LargeSum.log;
-import java.awt.BorderLayout;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigInteger;
 import org.apache.log4j.Logger;
+
+import java.io.*;
 
 /**
  *
@@ -37,8 +31,8 @@ public class ExamplesRandom {
             for (int i = 0; i < valueStr.length; i++) {
                 grid[i] = Integer.parseInt(valueStr[i]);
             }
-            for (int i = 0; i < grid.length; i++) {
-                System.out.println(" " + grid[i]);
+            for (int j : grid) {
+                System.out.println(" " + j);
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -75,7 +69,7 @@ public class ExamplesRandom {
     }
 
     void printASCII() {
-        //Output ASCII charachters
+        //Output ASCII characters
         for (int i = 0; i < 255; i++) {
             //System.out.println(i + " ");
             System.out.println("ASCII " + (char) i + "  =  " + i);
@@ -90,7 +84,7 @@ public class ExamplesRandom {
         return ((n & 0x1) == 0);
     }
 
-    String binaryFomat(int m) {
+    String binaryFormat(int m) {
         return Integer.toString(m, 2);
     }
 
@@ -126,7 +120,7 @@ public class ExamplesRandom {
         String sampleString = "ThisIsString";
         log.info("To XOR: " + sampleString);
         String encryptedString = encryptDecrypt(sampleString);
-        log.info("Ecrypted String: " + encryptedString);
+        log.info("Encrypted String: " + encryptedString);
         log.info("Decrypted String: " + encryptDecrypt(encryptedString));
         System.out.println("Duration = " + (System.currentTimeMillis() - start) + " ms");
         System.out.println("startCount = " + startCount);
@@ -140,16 +134,8 @@ public class ExamplesRandom {
         String newStr = c.substring(5, 11);
         System.out.println(c);
         System.out.println(newStr);
-//        for(int i =0;i < c.length();i++){
-//        System.out.println(c.substring(i,i+1));
-//        }
         int cpCount = c.codePointCount(0, c.length());
         System.out.println(cpCount);
-//        do{
-//            System.out.println("Hello!");
-//            b--;
-//        }while (b > 0);
-
         int amountToRetire = 1_000_000;
         int payment = 3000;
         int interest;

@@ -79,6 +79,7 @@ public class LargestProductInAGrid {
                 }
             }
         } catch (IOException | NumberFormatException e) {
+            System.out.println();
         }
     }
 
